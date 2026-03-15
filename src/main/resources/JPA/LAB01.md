@@ -1,6 +1,7 @@
 ﻿Laboratorium I - Organizacja | Relacje w JPA
 
-1. Zsynchronizuj swoje repozytorium z repozytorium prowadzącego (Sync Fork bądź Pull z repozytorium prowadzącego). Można
+1. 
+2. Zsynchronizuj swoje repozytorium z repozytorium prowadzącego (Sync Fork bądź Pull z repozytorium prowadzącego). Można
    wykonać to bezpośrednio w GitHubie lub lokalnie.
 2. Zapoznaj sie ze strukturą projektu - nazwy pakietów, encje, enumy. Zwróć uwagę na application.properties w resources.
    Zapoznaj sie z ustawieniami aplikacji (przede wszystkim JPA).
