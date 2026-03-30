@@ -142,7 +142,7 @@ class TrainingApiIntegrationTest extends IntegrationTestBase {
     }
 
     @Test
-    void getAllTrainingByActivityType_whenGettingAllTrainingByActivityType() throws Exception {
+    void `getAllTrainingByActivityType_whenGettingAllTrainingByActivityType() throws Exception {
 
         User user1 = existingUser(generateClient());
         persistTraining(generateTrainingWithActivityType(user1, ActivityType.RUNNING));
