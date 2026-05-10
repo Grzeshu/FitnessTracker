@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import pl.wsb.fitnesstracker.user.api.User;
+import pl.wsb.fitnesstracker.user.api.UserDto;
+import pl.wsb.fitnesstracker.user.api.UserNotFoundException;
 import pl.wsb.fitnesstracker.user.api.UserProvider;
 import pl.wsb.fitnesstracker.user.api.UserService;
 
@@ -19,10 +21,13 @@ class UserServiceImpl implements UserService, UserProvider {
 
     @Override
     public User createUser(final User user) {
+
         log.info("Creating User {}", user);
+
         if (user.getId() != null) {
-            throw new IllegalArgumentException("User has already DB ID, update is not permitted!");
+            throw new IllegalArgumentException("User has already DB ID!");
         }
+
         return userRepository.save(user);
     }
 
@@ -39,6 +44,30 @@ class UserServiceImpl implements UserService, UserProvider {
     @Override
     public List<User> findAllUsers() {
         return userRepository.findAll();
+    }
+
+    @Override
+    public List<User> searchUsersByEmail(String email) {
+        return userRepository.findByEmailContainingIgnoreCase(email);
+    }
+
+    @Override
+    public void deleteUser(Long id) {
+        userRepository.deleteById(id);
+    }
+
+    @Override
+    public User updateUser(Long id, UserDto userDto) {
+
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException(id));
+
+        user.setFirstName(userDto.firstName());
+        user.setLastName(userDto.lastName());
+        user.setBirthdate(userDto.birthdate());
+        user.setEmail(userDto.email());
+
+        return userRepository.save(user);
     }
 
 }
